@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.atchat.mapper.FriendsMapper">
+
+    <select id="queryMyFriendsList" resultType="com.xu.atchat.model.dto.MyFriendDTO"
+            parameterType="String">
+
+		SELECT
+          tf.id AS id,
+          tu.id AS friendUserId,
+          tu.nickname AS friendNickname,
+          tu.username AS friendUsername,
+          tu.portrait_thumb AS friendPortraitThumb
+        FROM
+          t_friends tf
+        INNER JOIN
+          t_user tu
+        ON
+          tf.friends_user_id = tu.id
+        WHERE
+          tf.user_id = #{userId}
+
+	</select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.atchat.mapper.FriendsRequestMapper">
+    <select id="queryFriendRequestList" resultType="com.xu.atchat.model.dto.FriendRequestDTO"
+            parameterType="String">
+
+		select
+		    fr.id as id,
+			sender.id as friendUserId,
+			sender.username as friendUsername,
+			sender.portrait_thumb as friendPortraitThumb,
+			sender.nickname as friendNickname,
+			sender.usercode as friendUsercode,
+			fr.send_remark as sendRemark,
+			fr.status as friendsRequestStatus
+		from
+			t_friends_request fr
+		left join
+			t_user sender
+		on
+			fr.send_user_id = sender.id
+		where
+			fr.accept_user_id = #{acceptUserId}
+		order by
+		    fr.accept_time desc
+
+	</select>
+</mapper>
