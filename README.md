@@ -14,6 +14,40 @@ FastDFS和Minio文章末尾有安装方式
 
 
 
+### 启动运行
+
+下载：`git clone 项目`
+
+运行和编译环境： `Maven` `IDEA` `JDK1.8`
+
+服务：安装`FastDFS`和`Minio`，文末有安装方式
+
+配置：
+
+需要修改`test`配置文件
+
+```properties
+# 数据库连接修改
+spring.datasource.url=jdbc:mysql://localhost:3306/atchat?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+spring.datasource.username=
+spring.datasource.password=
+
+# tracker服务器地址列表，需要修改
+fdfs.tracker-list[0]=192.168.123.233:22122
+
+# MinIo文件服务器，需要修改
+min.io.endpoint=http://your.endpoint
+min.io.accessKey=your_key
+min.io.secretKey=your_secret
+min.io.bucketName=your_bucketName
+```
+
+数据库：
+
+导入`doc/sql/atchat.sql`文件
+
+
+
 ### 技术选型
 
 SpringBoot
@@ -85,6 +119,7 @@ RabbitMQ
 ### 待开发事项
 
 - [ ] 前端重构
+  
   - [ ] uniapp
 - [ ] 后端重构
   - [ ] Netty集群
