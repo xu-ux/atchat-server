@@ -2,29 +2,36 @@
 
 ## 介绍
 
-一个简单的即时聊天项目，前端暂未开源，可以实现加好友，图片、文本、语音消息聊天等功能
+一个简单的即时聊天项目，前端暂未开源（等重构结束再说😎），可以实现加好友，图片、文本、语音消息聊天等功能
+
+核心聊天功能使用Netty+WebSocket实现
 
 缓存使用本地缓存，Redis相关配置被我清除了
 
-头像设置则使用单机版FastDFS
+头像和二维码使用单机版FastDFS存储
 
-聊天过程中的音频和图片会上传至MinIo文件服务器
+聊天过程中的音频和图片使用MinIo存储
 
-FastDFS和Minio文章末尾有安装方式
+备注：FastDFS和Minio文章末尾有安装方式
 
 
 
 ### 启动运行
 
-下载：`git clone 项目`
+1. 下载：
 
-运行和编译环境： `Maven` `IDEA` `JDK1.8`
+   `git clone 项目`
 
-服务：安装`FastDFS`和`Minio`，文末有安装方式
+2. 运行和编译环境： 
+   	`Maven` `IDEA` `JDK1.8`
 
-配置：
+3. 服务：
 
-需要修改`test`配置文件
+   安装`FastDFS`和`Minio`，文末有安装方式
+
+4. 配置：
+
+   需要修改`test`配置文件
 
 ```properties
 # 数据库连接修改
@@ -42,9 +49,9 @@ min.io.secretKey=your_secret
 min.io.bucketName=your_bucketName
 ```
 
-数据库：
+5. 数据库：
 
-导入`doc/sql/atchat.sql`文件
+   导入`doc/sql/atchat.sql`文件
 
 
 
@@ -74,7 +81,7 @@ RabbitMQ
 
 ...
 
-文件存储，可以自行去集成OSS（反正也不贵）；项目里面有两种存储方式，其中Minio是后面刚好接触，顺便在业务层集成了它
+文件存储，可以自行去集成OSS（反正也不贵额🙄）；项目里面有两种存储方式，其中Minio是后面刚好接触，顺便在业务层集成了它
 
 
 
