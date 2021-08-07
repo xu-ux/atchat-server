@@ -1,6 +1,6 @@
 # 即时聊天
 
-## 介绍
+## 一、介绍
 
 一个简单的即时聊天项目，前端暂未开源（等重构结束再说😎），可以实现加好友，图片、文本、语音消息聊天等功能
 
@@ -16,7 +16,74 @@
 
 
 
-### 启动运行
+### 1.1 技术选型
+
+```
+SpringBoot
+MyBatisPlus
+Mysql
+Druid
+Redis
+Netty
+DingTalk
+FastDFS
+Minio
+ELasticSearch
+RabbitMQ
+...
+```
+
+
+文件存储，可以自行去集成OSS（反正也不贵额🙄）；项目里面有两种存储方式，其中Minio是后面刚好接触，顺便在业务层集成了它
+
+
+
+### 1.2 项目结构
+
+```shell
+.
+|-- AtchatApplication.java
+|-- FastDFSBoot.java # fastDFS客户端
+|-- NettyBoot.java # netty服务启动
+|-- advance # 扩展异常
+|-- annotation # 自定义注解
+|-- cache # 本地缓存
+|-- config # 配置文件
+|-- constant # 常量
+|-- controller # 接口
+|-- mapper # 持久化
+|-- model # 模型
+|-- netty # netty的处理器
+|-- service # 服务
+|-- task # 定时任务
+`-- util # 工具
+
+```
+
+
+### 1.3 待开发事项
+
+- [ ] 前端重构
+  
+  - [ ] uniapp
+- [ ] 后端重构
+  - [ ] Netty集群
+  - [ ] 微服务架构
+
+- [ ] 业务功能
+
+  - [ ] JWT
+
+  - [ ] 群聊、群组
+
+  - [ ] 聊天记录搜索
+
+  - [ ] 其他推送渠道
+
+
+## 二、快速上手
+
+### 2.1 启动运行
 
 1. 下载：
 
@@ -55,102 +122,33 @@ min.io.bucketName=your_bucketName
 
 
 
-### 技术选型
-
-SpringBoot
-
-MyBatisPlus
-
-Mysql
-
-Druid
-
-Redis
-
-Netty
-
-DingTalk
-
-FastDFS
-
-Minio
-
-ELasticSearch
-
-RabbitMQ
-
-...
-
-文件存储，可以自行去集成OSS（反正也不贵额🙄）；项目里面有两种存储方式，其中Minio是后面刚好接触，顺便在业务层集成了它
-
-
-
-### 项目结构
-
-```shell
-.
-|-- AtchatApplication.java
-|-- FastDFSBoot.java # fastDFS客户端
-|-- NettyBoot.java # netty服务启动
-|-- advance # 扩展异常
-|-- annotation # 自定义注解
-|-- cache # 本地缓存
-|-- config # 配置文件
-|-- constant # 常量
-|-- controller # 接口
-|-- mapper # 持久化
-|-- model # 模型
-|-- netty # netty的处理器
-|-- service # 服务
-|-- task # 定时任务
-`-- util # 工具
-
-```
-
+## 三、系统展示
 
 
 ### 监控
+Druid数据源监控：
+!["SQL防火墙"](image.assets/image-20210424111449181.png)
 
-![image-20210424111449181](image.assets/image-20210424111449181.png)
-
-![image-20210424092713857](image.assets/image-20210424092713857.png)
+!["Web请求监控"](image.assets/image-20210424092713857.png)
 
 
 
 ### 聊天效果
+两台客户端进行交流通信：
+!["两台客户端进行交流通信"](image.assets/chat2.gif)
 
-![chat2](image.assets/chat2.gif)
 
-
-
-### 待开发事项
-
-- [ ] 前端重构
-  
-  - [ ] uniapp
-- [ ] 后端重构
-  - [ ] Netty集群
-  - [ ] 微服务架构
-
-- [ ] 业务功能
-
-  - [ ] JWT
-
-  - [ ] 群聊、群组
-
-  - [ ] 聊天记录搜索
-
-  - [ ] 其他推送渠道
 
     
 
-### FastDFS和Minio安装
+## 四、FastDFS和Minio安装
 
-#### FastDFS
+### 4.1 Docker方式安装单机版FastDFS
 
-使用docker安装，[详细文章](https://hub.docker.com/repository/docker/xuux/fastdfs)
+使用docker安装，[详细文章](https://hub.docker.com/r/xuux/fastdfs)
 
-FASTDFS_IPADDR 指定主机IP
+1.拉取镜像生成容器
+FASTDFS_IPADDR 设置主机IP
 
 ```shell
 docker run -d --restart=always \
@@ -163,10 +161,10 @@ docker run -d --restart=always \
 --name fastdfs xuux/fastdfs:alpine
 ```
 
-需要修改宿主机路由
+2.需要修改宿主机路由
 
 `iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 22122 -d 172.17.0.2 -j SNAT --to 192.168.1.234`
 
-#### Minio
+### 4.2 Docker方式安装分布式存储Minio
 
 使用docker安装，[官网](https://docs.min.io/docs/minio-docker-quickstart-guide.html)

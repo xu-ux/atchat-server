@@ -27,10 +27,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-      <!--  <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -155,7 +151,6 @@
             <version>7.0.2</version>
         </dependency>
 
-
         <!-- 二维码 -->
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -163,14 +158,12 @@
             <version>3.3.3</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>2.2.0</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -204,7 +197,6 @@
     <build>
         <finalName>atchat</finalName>
         <plugins>
-
             <!--不编译test-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
